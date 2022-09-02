@@ -20,7 +20,7 @@ interface NewsApi {
 object RetrofitClient {
 
     fun getInstance(): Retrofit {
-       return Retrofit.Builder().baseUrl("https://newsapi.org/v2")
+       return Retrofit.Builder().baseUrl("https://newsapi.org/v2/")
                 .addConverterFactory(GsonConverterFactory.create()).build()
     }
 }

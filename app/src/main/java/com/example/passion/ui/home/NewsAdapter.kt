@@ -13,6 +13,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     fun setNewsArticles(items: List<Articles>) {
         articles = items.toMutableList()
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
@@ -25,11 +26,17 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
         holder.bind(position)
     }
 
-    override fun getItemCount(): Int = 10
+    override fun getItemCount(): Int = articles.size
 
-    inner class NewsViewHolder(binding: ItemNewsLayoutBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+   inner class NewsViewHolder(val itemBinding: ItemNewsLayoutBinding) :
+        RecyclerView.ViewHolder(itemBinding.root) {
+
         fun bind(pos: Int) {
+            val article = articles[pos]
+            article.let {
+                itemBinding.tvTitleNews.text = it.title
+                itemBinding.tvDescriptionNews.text = it.description
+            }
         }
     }
 }
