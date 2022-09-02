@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.passion.ui.HomeFragment"
+        android:name="com.example.passion.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home"    >
         <argument
