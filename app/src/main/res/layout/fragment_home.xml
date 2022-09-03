@@ -11,15 +11,21 @@
         android:id="@+id/toolBarHome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary"
+        android:background="@color/purple_700"
         android:elevation="2dp"
         app:title="@string/app_name"
-        app:titleTextColor="@color/black" />
+        app:titleTextColor="@color/white" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewHome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/recyclerViewHome"/>
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/shimmerLayout"
+        layout="@layout/shimmer_shimmer_layout"
+        android:visibility="gone" />
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

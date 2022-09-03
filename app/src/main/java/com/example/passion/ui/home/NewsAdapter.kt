@@ -1,8 +1,11 @@
 package com.example.passion.ui.home
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.passion.data.models.Articles
 import com.example.passion.databinding.ItemNewsLayoutBinding
 
@@ -36,6 +39,11 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
             article.let {
                 itemBinding.tvTitleNews.text = it.title
                 itemBinding.tvDescriptionNews.text = it.description
+                if(it.urlToImage!=null)
+                Glide.with(itemView.context)
+                    .load(Uri.parse(it.urlToImage))
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(itemBinding.imageViewNews)
             }
         }
     }

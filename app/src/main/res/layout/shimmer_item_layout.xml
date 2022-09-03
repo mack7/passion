@@ -5,35 +5,39 @@
     android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageViewNews"
+        android:id="@+id/imageViewShimmer"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_margin="10dp"
-        android:src="@drawable/khaleesi"
+        android:src="@color/purple_200"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvTitleNews"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:hint="@string/app_name"
-        app:layout_constraintLeft_toRightOf="@+id/imageViewNews"
+        android:background="@color/purple_200"
+        app:layout_constraintLeft_toRightOf="@+id/imageViewShimmer"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvDescriptionNews"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
-        android:hint="@string/app_name"
-        app:layout_constraintLeft_toRightOf="@+id/imageViewNews"
+        android:height="30dp"
+        android:background="@color/purple_200"
+        app:layout_constraintLeft_toRightOf="@+id/imageViewShimmer"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitleNews" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
