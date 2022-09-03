@@ -3,7 +3,6 @@ package com.example.passion.ui.home
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
@@ -13,9 +12,7 @@ import com.example.passion.data.api.NewsApi
 import com.example.passion.data.api.RetrofitClient
 import com.example.passion.data.models.Articles
 import com.example.passion.databinding.FragmentHomeBinding
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import okhttp3.internal.wait
+import kotlinx.coroutines.*
 
 const val apiKey = "45b441614a484a82a76cbedd754b9f40"
 
@@ -41,19 +38,22 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(context)
         }
-        getNewsArticles()
+
+        GlobalScope.launch {
+            withContext(Dispatchers.Main) {
+                articleList.value = getNewsArticles()
+            }
+        }
         articleList.observe(viewLifecycleOwner, Observer {
-            newsAdapter.setNewsArticles(it)
+            if (it.isNotEmpty())
+                newsAdapter.setNewsArticles(it)
         })
     }
 
-    fun getNewsArticles() {
+    private suspend fun getNewsArticles(): List<Articles> {
         val api = RetrofitClient.getInstance().create(NewsApi::class.java)
-        var movieList: List<Articles> = mutableListOf()
-        GlobalScope.launch {
-            val result = api.getNews("us", apiKey)
-            articleList.value = result.body()?.articles ?: mutableListOf()
-        }
+        val result = api.getNews("us", apiKey)
+        return (result.body()?.articles ?: mutableListOf<Articles>())
     }
 
 
