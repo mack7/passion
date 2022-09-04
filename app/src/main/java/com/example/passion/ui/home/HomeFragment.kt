@@ -1,6 +1,5 @@
 package com.example.passion.ui.home
 
-import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -11,13 +10,13 @@ import com.example.passion.R
 import com.example.passion.data.repository.HomeRepository
 import com.example.passion.data.viewmodels.HomeViewModel
 import com.example.passion.databinding.FragmentHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
 const val apiKey = "45b441614a484a82a76cbedd754b9f40"
 
-/**
- * A simple [Fragment] subclass.
- */
+
+@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var _binding: FragmentHomeBinding
@@ -26,9 +25,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private val newsAdapter = NewsAdapter()
 
-    private val homeViewModel: HomeViewModel by viewModels {
-        HomeViewModel.Factory(HomeRepository())
-    }
+    private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,10 +37,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             layoutManager = LinearLayoutManager(context)
         }
 
-        /*
-        The observer will only receive events if the owner is in
-         Lifecycle.State.STARTED or Lifecycle.State.RESUMED state (active).
-         */
         homeViewModel.articleList.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 _binding.recyclerViewHome.visibility = View.VISIBLE

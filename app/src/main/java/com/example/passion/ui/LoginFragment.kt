@@ -7,13 +7,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.passion.R
 import com.example.passion.data.models.User
 import com.example.passion.databinding.FragmentLoginsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LoginFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class LoginFragment : Fragment(R.layout.fragment_logins) {
 
     private lateinit var _binding: FragmentLoginsBinding

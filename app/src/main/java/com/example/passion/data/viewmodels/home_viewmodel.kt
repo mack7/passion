@@ -3,9 +3,12 @@ package com.example.passion.data.viewmodels
 import androidx.lifecycle.*
 import com.example.passion.data.models.Articles
 import com.example.passion.data.repository.HomeRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel(private val repository: HomeRepository) : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(private val repository: HomeRepository) : ViewModel() {
 
     var articleList: LiveData<List<Articles>> = repository.articleList
 
@@ -18,13 +21,6 @@ class HomeViewModel(private val repository: HomeRepository) : ViewModel() {
     private fun getArticles() {
         viewModelScope.launch {
             repository.getNewsArticles()
-        }
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    class Factory(private val repository: HomeRepository) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return HomeViewModel(repository) as T
         }
     }
 }
